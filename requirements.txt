@@ -1,0 +1,10 @@
+# Core dependencies
+pydantic
+requests
+bs4
+lxml
+cloudscraper
+
+# API dependencies
+fastapi
+uvicorn[standard]
