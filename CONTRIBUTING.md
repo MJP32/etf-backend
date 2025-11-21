@@ -7,7 +7,7 @@ For development it is recommended to use some additional code formatters, tools 
 
 Setup your development environment with your preferred tool, we use conda:
 ```
-conda create -n pyetfdb python=3.9
+conda create -n etfdb python=3.9
 ```
 
 You can install the package in editable development mode with:

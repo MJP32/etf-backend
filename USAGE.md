@@ -25,7 +25,7 @@ After installation, you can use the `pyetfdb` command:
 
 ### List Available ETFs
 ```bash
-pyetfdb --list
+etfdb --list
 ```
 Output:
 ```
@@ -36,7 +36,7 @@ First 50 ETFs:
 
 ### Get All Data for an ETF
 ```bash
-pyetfdb SPY
+etfdb SPY
 ```
 Output:
 ```
@@ -60,42 +60,42 @@ AMZN   Amazon.com, Inc.                     3.32%
 ### Get Specific Data Types
 ```bash
 # Basic info only
-pyetfdb SPY --info
+etfdb SPY --info
 
 # Holdings only
-pyetfdb SPY --holdings
+etfdb SPY --holdings
 
 # Performance metrics
-pyetfdb SPY --performance
+etfdb SPY --performance
 
 # Dividend information
-pyetfdb SPY --dividend
+etfdb SPY --dividend
 
 # Expense analysis
-pyetfdb SPY --expense
+etfdb SPY --expense
 
 # Technical indicators
-pyetfdb SPY --technicals
+etfdb SPY --technicals
 
 # Holdings analysis
-pyetfdb SPY --holdings-analysis
+etfdb SPY --holdings-analysis
 
 # Real-time rankings
-pyetfdb SPY --realtime-rankings
+etfdb SPY --realtime-rankings
 ```
 
 ### JSON Output
 ```bash
 # Get all data as JSON
-pyetfdb SPY --json
+etfdb SPY --json
 
 # Get specific data as JSON
-pyetfdb SPY --holdings --json
+etfdb SPY --holdings --json
 ```
 
 ### Help
 ```bash
-pyetfdb --help
+etfdb --help
 ```
 
 ## Python Library Usage
@@ -103,7 +103,7 @@ pyetfdb --help
 You can also use it directly in Python code:
 
 ```python
-from pyetfdb_scraper.etf import ETF, load_etfs
+from python_etf_db_service.etf import ETF, load_etfs
 
 # List all available ETFs
 etfs = load_etfs()
@@ -130,7 +130,7 @@ print(all_data)
 
 ### Compare Multiple ETFs
 ```python
-from pyetfdb_scraper.etf import ETF
+from python_etf_db_service.etf import ETF
 
 tickers = ['SPY', 'IVV', 'VOO']
 for ticker in tickers:
@@ -141,12 +141,12 @@ for ticker in tickers:
 
 ### Export to JSON File
 ```bash
-pyetfdb SPY --json > spy_data.json
+etfdb SPY --json > spy_data.json
 ```
 
 ### Get Top Holdings for Analysis
 ```python
-from pyetfdb_scraper.etf import ETF
+from python_etf_db_service.etf import ETF
 import pandas as pd
 
 etf = ETF('SPY')

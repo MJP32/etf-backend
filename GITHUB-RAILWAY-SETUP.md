@@ -74,7 +74,7 @@ Visit these URLs to verify it's working:
 
 If needed, update the backend CORS to allow your frontend domain:
 
-Edit `src/pyetfdb_scraper/api.py` and add your Railway URL:
+Edit `src/python_etf_db_service/api.py` and add your Railway URL:
 ```python
 app.add_middleware(
     CORSMiddleware,
@@ -89,7 +89,7 @@ app.add_middleware(
 
 Then commit and push:
 ```bash
-git add src/pyetfdb_scraper/api.py
+git add src/python_etf_db_service/api.py
 git commit -m "Update CORS for Railway deployment"
 git push
 ```

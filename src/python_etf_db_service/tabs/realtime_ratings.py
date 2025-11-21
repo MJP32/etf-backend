@@ -1,5 +1,5 @@
 from bs4.element import ResultSet
-from pyetfdb_scraper.utils import _scrape_table, ratings_regex_header
+from python_etf_db_service.utils import _scrape_table, ratings_regex_header
 
 
 def get_realtime_ratings(ticker_profile_soup: ResultSet):

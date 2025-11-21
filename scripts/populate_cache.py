@@ -15,11 +15,11 @@ import logging
 from pathlib import Path
 import sys
 
-# Add src to path so we can import pyetfdb_scraper
+# Add src to path so we can import python_etf_db_service
 sys.path.insert(0, str(Path(__file__).parent.parent / 'src'))
 
-from pyetfdb_scraper.etf import ETF, load_etfs
-from pyetfdb_scraper.cache import get_cache
+from python_etf_db_service.etf import ETF, load_etfs
+from python_etf_db_service.cache import get_cache
 
 logging.basicConfig(
     level=logging.INFO,

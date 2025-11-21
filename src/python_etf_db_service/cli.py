@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-"""Command-line interface for pyetfdb-scraper."""
+"""Command-line interface for python-etf-db-service."""
 
 import argparse
 import json
 import sys
 from typing import Optional
 
-from pyetfdb_scraper.etf import ETF, load_etfs
+from python_etf_db_service.etf import ETF, load_etfs
 
 
 def list_etfs():

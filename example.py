@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Example script showing how to use pyetfdb-scraper.
+Example script showing how to use python-etf-db-service.
 Run with: python3 example.py
 """
 
@@ -10,12 +10,12 @@ import os
 # Add src to path so we can import without installing
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
-from pyetfdb_scraper.etf import ETF, load_etfs
+from python_etf_db_service.etf import ETF, load_etfs
 
 
 def main():
     print("=" * 60)
-    print("pyetfdb-scraper Example")
+    print("python-etf-db-service Example")
     print("=" * 60)
     print()
     print("Note: This uses cloudscraper to bypass Cloudflare protection.")

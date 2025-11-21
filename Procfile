@@ -1,1 +1,1 @@
-web: uvicorn pyetfdb_scraper.api:app --host 0.0.0.0 --port $PORT
+web: uvicorn python_etf_db_service.api:app --host 0.0.0.0 --port $PORT

@@ -1,5 +1,5 @@
 from bs4.element import ResultSet, Tag
-from pyetfdb_scraper.utils import _scrape_table, taxanalysis_regex_header, get_nested
+from python_etf_db_service.utils import _scrape_table, taxanalysis_regex_header, get_nested
 
 
 def get_expense(ticker_profile_soup: ResultSet):

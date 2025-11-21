@@ -1,5 +1,5 @@
 from bs4.element import ResultSet, Tag
-from pyetfdb_scraper.utils import (
+from python_etf_db_service.utils import (
     _scrape_div_class_ticker_assets,
     _scrape_table,
     jump_siblings,
@@ -14,7 +14,7 @@ from pyetfdb_scraper.utils import (
     altetfs2_regex_header,
     altetfs_regex_header,
 )
-from pyetfdb_scraper.models import InfoModel
+from python_etf_db_service.models import InfoModel
 
 
 def get_info(ticker_profile_soup: ResultSet) -> InfoModel:

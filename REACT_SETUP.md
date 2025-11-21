@@ -28,10 +28,10 @@ This installs:
 
 ```bash
 # Option 1: Using uvicorn directly
-uvicorn pyetfdb_scraper.api:app --reload --host 0.0.0.0 --port 8000
+uvicorn python_etf_db_service.api:app --reload --host 0.0.0.0 --port 8000
 
 # Option 2: Using Python
-python -m uvicorn pyetfdb_scraper.api:app --reload
+python -m uvicorn python_etf_db_service.api:app --reload
 ```
 
 The API will be available at:
@@ -321,7 +321,7 @@ Your React app will run on http://localhost:3000 (or http://localhost:5173 for V
 pip install gunicorn
 
 # Run with gunicorn
-gunicorn pyetfdb_scraper.api:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+gunicorn python_etf_db_service.api:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
 ```
 
 ### Frontend (React)
@@ -335,7 +335,7 @@ npm run build
 
 ### Update CORS Origins
 
-In `src/pyetfdb_scraper/api.py`, update the CORS origins to include your production domain:
+In `src/python_etf_db_service/api.py`, update the CORS origins to include your production domain:
 
 ```python
 allow_origins=[

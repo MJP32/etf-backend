@@ -1,21 +1,21 @@
-# pyetfdb_scraper: Free ETF data at your fingertips
-```pyetfdb_scraper``` is a Python library for extracting ETF data directly from [ETFDB](https://etfdb.com/), a website providing one of the largest ETF Databases containing ETFs from a vast range of asset classes, industries, issuers, and investment styles.
+# python_etf_db_service: Free ETF data at your fingertips
+```python_etf_db_service``` is a Python library for extracting ETF data directly from [ETFDB](https://etfdb.com/), a website providing one of the largest ETF Databases containing ETFs from a vast range of asset classes, industries, issuers, and investment styles.
 
 ## Quick Start
-Install with ```pip``` as a package pip. See the pip package here https://pypi.org/project/pyetfdb-scraper/.
+Install with ```pip``` as a package pip. See the pip package here https://pypi.org/project/python-etf-db-service/.
 
 ```
-pip install pyetfdb-scraper
+pip install python-etf-db-service
 ```
 
 ```python
-from pyetfdb_scraper import etf
+from python_etf_db_service import etf
 ```
 
 ## Example Usage
 
 ```python
-from pyetfdb_scraper.etf import ETF,load_etfs
+from python_etf_db_service.etf import ETF,load_etfs
 # returns list of available ETFs.
 etfs = load_etfs()
 ```

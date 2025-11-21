@@ -1,5 +1,5 @@
 from bs4.element import ResultSet
-from pyetfdb_scraper.utils import get_nested, _scrape_table, etfdividend_regex_header
+from python_etf_db_service.utils import get_nested, _scrape_table, etfdividend_regex_header
 
 
 def get_dividend(ticker_profile_soup: ResultSet):

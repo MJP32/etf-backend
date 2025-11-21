@@ -1,5 +1,5 @@
 from bs4.element import ResultSet
-from pyetfdb_scraper.utils import (
+from python_etf_db_service.utils import (
     get_nested,
 )
 

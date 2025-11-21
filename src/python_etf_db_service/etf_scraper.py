@@ -5,7 +5,7 @@ import warnings
 from bs4 import BeautifulSoup
 import cloudscraper
 
-from pyetfdb_scraper.tabs import (
+from python_etf_db_service.tabs import (
     get_info,
     get_expense,
     get_holdings,
@@ -15,7 +15,7 @@ from pyetfdb_scraper.tabs import (
     get_technicals,
     get_realtime_ratings,
 )
-from pyetfdb_scraper.models import InfoModel, BaseInfoModel, ExpenseModel
+from python_etf_db_service.models import InfoModel, BaseInfoModel, ExpenseModel
 
 class ETFScraper(object):
     

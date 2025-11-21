@@ -1,5 +1,5 @@
 """
-FastAPI backend for pyetfdb-scraper.
+FastAPI backend for Python ETF DB Service.
 This provides REST API endpoints that can be consumed by a React frontend.
 """
 
@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Load environment variables from .env file
-# Look for .env in the pyetfdb-scraper directory
+# Look for .env in the project root directory
 env_path = Path(__file__).parent.parent.parent / '.env'
 logger.info(f"Loading .env from: {env_path}")
 logger.info(f".env file exists: {env_path.exists()}")
@@ -28,9 +28,9 @@ logger.info(f"EODHD_API_KEY loaded: {bool(api_key)}")
 if api_key:
     logger.info(f"API Key (first 20 chars): {api_key[:20]}...")
 
-from pyetfdb_scraper.etf import ETF, load_etfs
-from pyetfdb_scraper.cache import get_cache
-from pyetfdb_scraper.eodhd_client import EODHDClient
+from python_etf_db_service.etf import ETF, load_etfs
+from python_etf_db_service.cache import get_cache
+from python_etf_db_service.eodhd_client import EODHDClient
 
 # Initialize FastAPI app
 app = FastAPI(

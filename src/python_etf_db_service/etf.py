@@ -1,7 +1,7 @@
 import os 
 import json
 from typing import List
-from pyetfdb_scraper.etf_scraper import ETFScraper
+from python_etf_db_service.etf_scraper import ETFScraper
 
 class ETF(ETFScraper):
     def __init__(

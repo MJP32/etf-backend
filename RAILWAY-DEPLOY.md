@@ -110,6 +110,6 @@ Railway free tier includes:
 - Verify the API is running on `$PORT` environment variable
 
 ### CORS errors
-- Update `src/pyetfdb_scraper/api.py` CORS settings
+- Update `src/python_etf_db_service/api.py` CORS settings
 - Add your Railway domain to `allow_origins`
 - Redeploy: `railway up` or push to GitHub

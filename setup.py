@@ -3,7 +3,7 @@ import pathlib
 from setuptools import setup
 from setuptools import find_packages
 
-name = "pyetfdb_scraper"
+name = "python_etf_db_service"
 here = pathlib.Path.absolute(pathlib.Path(__file__).resolve().parent)
 
 with open("README.md", "r") as fh:
@@ -50,7 +50,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "pyetfdb=pyetfdb_scraper.cli:main",
+            "etfdb=python_etf_db_service.cli:main",
         ],
     },
 )

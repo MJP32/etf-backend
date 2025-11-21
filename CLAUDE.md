@@ -4,14 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-pyetfdb-scraper is a Python library that scrapes ETF data from ETFDB.com. It provides structured access to comprehensive ETF information including vitals, holdings, performance metrics, dividends, and technical indicators.
+python-etf-db-service is a Python library that scrapes ETF data from ETFDB.com. It provides structured access to comprehensive ETF information including vitals, holdings, performance metrics, dividends, and technical indicators.
 
 ## Development Commands
 
 ### Setup
 ```bash
 # Create conda environment
-conda create -n pyetfdb python=3.9
+conda create -n etfdb python=3.9
 conda activate pyetfdb
 
 # Install in editable mode with dev dependencies
@@ -26,18 +26,18 @@ pre-commit install
 ### Running the CLI
 ```bash
 # List available ETFs
-pyetfdb --list
+etfdb --list
 
 # Get all data for an ETF
-pyetfdb SPY
+etfdb SPY
 
 # Get specific data types
-pyetfdb SPY --info
-pyetfdb SPY --holdings
-pyetfdb SPY --performance
+etfdb SPY --info
+etfdb SPY --holdings
+etfdb SPY --performance
 
 # Output as JSON
-pyetfdb SPY --json
+etfdb SPY --json
 ```
 
 ### Running the API Server (for React/Web Apps)
@@ -49,7 +49,7 @@ pip install -e ".[api]"
 python start_api.py
 
 # Or use uvicorn directly
-uvicorn pyetfdb_scraper.api:app --reload --port 8000
+uvicorn python_etf_db_service.api:app --reload --port 8000
 
 # API will be available at:
 # - API: http://localhost:8000
@@ -80,38 +80,38 @@ pip install -e .
 
 ### Core Components
 
-**CLI Module** (`src/pyetfdb_scraper/cli.py`)
+**CLI Module** (`src/python_etf_db_service/cli.py`)
 - Command-line interface for the library
 - Provides `pyetfdb` command after installation
 - Supports listing ETFs, fetching specific data types, and JSON output
 - Entry point defined in `setup.py` console_scripts
 
-**ETF Class** (`src/pyetfdb_scraper/etf.py`)
+**ETF Class** (`src/python_etf_db_service/etf.py`)
 - Main user-facing interface that inherits from `ETFScraper`
 - Provides property-based access to all ETF data categories
 - `to_dict()` method aggregates all data into a single dictionary
 - `load_etfs()` function loads available ETF tickers from `data/etfdb.json`
 
-**ETFScraper Class** (`src/pyetfdb_scraper/etf_scraper.py`)
+**ETFScraper Class** (`src/python_etf_db_service/etf_scraper.py`)
 - Base scraping engine that handles HTTP requests to ETFDB.com
 - Manages user-agent rotation from `data/user-agents.txt` to avoid rate limiting
 - Implements retry logic with exponential backoff (handles 429 rate limit errors)
 - Parses HTML using BeautifulSoup and extracts the main `etf-ticker-body` div
 - Delegates specific data extraction to tab-specific modules
 
-**Tab Modules** (`src/pyetfdb_scraper/tabs/`)
+**Tab Modules** (`src/python_etf_db_service/tabs/`)
 - Each tab corresponds to a section on the ETFDB website
 - Modules: `info.py`, `expense.py`, `holdings.py`, `holdings_analysis.py`, `performance.py`, `dividend.py`, `technicals.py`, `realtime_ratings.py`
 - All use shared utilities from `utils.py` for consistent scraping patterns
 
-**Utilities** (`src/pyetfdb_scraper/utils.py`)
+**Utilities** (`src/python_etf_db_service/utils.py`)
 - `_scrape_div_class_ticker_assets()`: Extracts data from divs with class "ticker-assets"
 - `_scrape_table()`: Parses HTML tables into dictionaries (handles both vertical and horizontal layouts)
 - `jump_siblings()`: Navigates DOM tree by jumping between sibling elements
 - `unpack_tag_contents()`: Recursively unpacks nested HTML tags to extract clean text
 - `get_nested()`: Safe nested dictionary access with None fallback
 
-**Models** (`src/pyetfdb_scraper/models/`)
+**Models** (`src/python_etf_db_service/models/`)
 - Pydantic models for type validation: `InfoModel`, `BaseInfoModel`, `ExpenseModel`
 
 ### Data Flow
