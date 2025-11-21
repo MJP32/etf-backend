@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(python3 -m pip:*)",
+      "Bash(chmod:*)",
+      "Bash(/mnt/c/Users/micha/Documents/dev/oct/untitled/.venv/Scripts/python.exe -m pip install:*)",
+      "Bash(/mnt/c/Users/micha/Documents/dev/oct/untitled/.venv/Scripts/python.exe:*)",
+      "Bash(curl:*)",
+      "Bash(npm install)",
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "Bash(python -m json.tool:*)",
+      "Bash(cat:*)",
+      "Bash(python start_api.py:*)",
+      "Bash(pkill:*)",
+      "WebSearch",
+      "WebFetch(domain:eodhd.com)",
+      "WebFetch(domain:eodhd.medium.com)",
+      "Bash(python3 -m json.tool:*)",
+      "Bash(netstat:*)",
+      "Bash(ss:*)",
+      "Bash(python3:*)",
+      "Bash(find:*)",
+      "Bash(powershell.exe -Command \"Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess | ForEach-Object { Get-Process -Id $_| Select-Object Id, ProcessName, Path }\")",
+      "Bash(taskkill.exe:*)",
+      "Bash(powershell.exe -Command \"Stop-Process -Name python -Force -ErrorAction SilentlyContinue\")",
+      "Bash(python test_qqq.py:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill -9:*)",
+      "Bash(powershell.exe -Command \"Stop-Process -Name python -Force -ErrorAction SilentlyContinue; Stop-Process -Name node -Force -ErrorAction SilentlyContinue\")",
+      "Bash(powershell.exe -Command \"cd C:\\Users\\micha\\Documents\\dev; Rename-Item -Path ''nov'' -NewName ''etf'' -Force\")",
+      "Bash(powershell.exe -Command \"cd C:\\Users\\micha\\Documents\\dev\\etf; Rename-Item -Path ''pyetfdb-scraper'' -NewName ''etf-backend'' -Force\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
