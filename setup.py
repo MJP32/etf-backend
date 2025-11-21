@@ -21,6 +21,7 @@ with open(
     version = result.group(1)
 
 dev_requirements = {"black", "pre-commit"}
+api_requirements = {"fastapi", "uvicorn[standard]"}
 
 setup(
     name=name,
@@ -40,6 +41,16 @@ setup(
         "requests",
         "bs4",
         "lxml",
+        "cloudscraper",
     ],
-    extras_require={"dev": list(dev_requirements)},
+    extras_require={
+        "dev": list(dev_requirements),
+        "api": list(api_requirements),
+        "all": list(dev_requirements | api_requirements),
+    },
+    entry_points={
+        "console_scripts": [
+            "pyetfdb=pyetfdb_scraper.cli:main",
+        ],
+    },
 )

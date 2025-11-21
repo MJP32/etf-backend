@@ -2,9 +2,8 @@ import os
 import time
 import random
 import warnings
-import requests
 from bs4 import BeautifulSoup
-from urllib3.exceptions import NewConnectionError
+import cloudscraper
 
 from pyetfdb_scraper.tabs import (
     get_info,
@@ -42,36 +41,54 @@ class ETFScraper(object):
 
     def __request_ticker(self, retries: int = 2) -> BeautifulSoup:
         try:
-            print(f"Requesting for {self.ticker}", "\t\t")
-            response: requests.Response = requests.get(
-                self.scrape_url, headers=self.request_headers
+            print(f"Requesting for {self.ticker}...")
+
+            # Create a cloudscraper instance - let it use default settings
+            scraper = cloudscraper.create_scraper(
+                browser={
+                    'browser': 'chrome',
+                    'platform': 'windows',
+                    'mobile': False
+                },
+                delay=10  # Add delay to solve challenges
             )
-            print(f"Completed Requested for {self.ticker}")
+
+            # Make the request without custom headers - use cloudscraper's defaults
+            response = scraper.get(self.scrape_url)
+
+            print(f"Completed request for {self.ticker}")
+
             if response.status_code == 200:
                 soup = BeautifulSoup(response.text, features="lxml")
+
+                # Check if we got blocked by Cloudflare
+                if "Just a moment" in response.text or "Enable JavaScript and cookies" in response.text:
+                    raise Exception("Cloudflare challenge detected")
+
                 return soup
             elif response.status_code == 429:
                 warnings.warn(
                     "Too many requests. Sleeping for 60 seconds and retrying..."
                 )
                 time.sleep(60)
-                response: requests.Response = requests.get(
+                response = scraper.get(
                     self.scrape_url, headers=self.request_headers
                 )
-                soup = BeautifulSoup(response.text)
+                soup = BeautifulSoup(response.text, features="lxml")
                 return soup
             else:
                 raise Exception(
-                    f"Request failed for {self.scrape_url}. Response code {str(response.status_code)}. Error string {response.text}"
+                    f"Request failed for {self.scrape_url}. Response code {str(response.status_code)}"
                 )
+
         except Exception as error:
             if retries:
-                print(f"Exception raised. Retrying for {retries} time. Error code is {str(error)}")
-                time.sleep(random.randrange(5))
-                self.__request_ticker(retries=retries - 1)
+                print(f"Exception raised. Retrying for {retries} time. Error: {str(error)[:100]}")
+                time.sleep(random.randrange(5, 10))
+                return self.__request_ticker(retries=retries - 1)
             else:
-                print(f"Reduced retries. Sleeping for 15 mins. Current symbol is {self.ticker}")
-                time.sleep(15 * 60)
+                print(f"Failed after all retries. Current symbol is {self.ticker}")
+                raise Exception(f"Failed to fetch data for {self.ticker} after multiple retries: {str(error)}")
 
     def _get_base_etf_info(
         self,

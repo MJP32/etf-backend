@@ -1,10 +1,23 @@
 .env
 
-
 dist/
 build/
 __pycache__/
 .vscode/
+.idea/
 *.egg-info
 
 *.csv
+*.db
+venv/
+venv-wsl/
+.venv/
+
+# Test files
+test_*.py
+*_test.py
+
+# Cache
+*.pyc
+*.pyo
+.pytest_cache/
