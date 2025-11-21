@@ -46,6 +46,7 @@ app.add_middleware(
         # Production
         "https://etfvaluepro.com",
         "https://www.etfvaluepro.com",
+        "https://etf-backend-production.up.railway.app",  # Railway backend
         # Development
         "http://localhost:3000",  # React default dev server
         "http://localhost:5173",  # Vite default dev server
