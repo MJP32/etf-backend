@@ -36,7 +36,7 @@ from python_etf_db_service.eodhd_client import EODHDClient
 app = FastAPI(
     title="ETF Data API",
     description="REST API for scraping ETF data from ETFDB.com",
-    version="1.0.0"
+    version="1.0.1"
 )
 
 # Configure CORS for React frontend
