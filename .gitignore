@@ -21,3 +21,6 @@ test_*.py
 *.pyc
 *.pyo
 .pytest_cache/
+
+# Vercel
+.vercel
