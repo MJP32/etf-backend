@@ -17,13 +17,13 @@ logger = logging.getLogger(__name__)
 
 # Load environment variables from .env file
 # Look for .env in the project root directory
-env_path = Path(__file__).parent.parent.parent / '.env'
+env_path = Path(__file__).parent.parent.parent / ".env"
 logger.info(f"Loading .env from: {env_path}")
 logger.info(f".env file exists: {env_path.exists()}")
 load_dotenv(dotenv_path=env_path)
 
 # Check if API key was loaded
-api_key = os.getenv('EODHD_API_KEY')
+api_key = os.getenv("EODHD_API_KEY")
 logger.info(f"EODHD_API_KEY loaded: {bool(api_key)}")
 if api_key:
     logger.info(f"API Key (first 20 chars): {api_key[:20]}...")
@@ -36,7 +36,7 @@ from python_etf_db_service.eodhd_client import EODHDClient
 app = FastAPI(
     title="ETF Data API",
     description="REST API for scraping ETF data from ETFDB.com",
-    version="1.0.1"
+    version="1.0.0",
 )
 
 # Configure CORS for React frontend
@@ -70,7 +70,7 @@ app.add_middleware(
 
 # Initialize EODHD client (if API key is available)
 eodhd_client = None
-if os.getenv('EODHD_API_KEY'):
+if os.getenv("EODHD_API_KEY"):
     try:
         eodhd_client = EODHDClient()
         logger.info("EODHD client initialized successfully")
@@ -94,14 +94,14 @@ async def root():
             "get_etf_info": "/api/etf/{ticker}/info",
             "get_etf_holdings": "/api/etf/{ticker}/holdings",
             "get_etf_performance": "/api/etf/{ticker}/performance",
-        }
+        },
     }
 
 
 @app.get("/api/etfs")
 async def list_etfs(
     limit: Optional[int] = Query(None, description="Limit number of results"),
-    offset: Optional[int] = Query(0, description="Offset for pagination")
+    offset: Optional[int] = Query(0, description="Offset for pagination"),
 ):
     """
     Get list of all available ETF tickers.
@@ -114,7 +114,7 @@ async def list_etfs(
         all_etfs = load_etfs()
 
         if limit:
-            etfs = all_etfs[offset:offset + limit]
+            etfs = all_etfs[offset : offset + limit]
         else:
             etfs = all_etfs[offset:]
 
@@ -122,7 +122,7 @@ async def list_etfs(
             "total": len(all_etfs),
             "count": len(etfs),
             "offset": offset,
-            "etfs": etfs
+            "etfs": etfs,
         }
     except Exception as e:
         logger.error(f"Error loading ETFs: {str(e)}")
@@ -130,7 +130,9 @@ async def list_etfs(
 
 
 @app.get("/api/etf/{ticker}")
-async def get_etf(ticker: str, force_refresh: bool = False, source: str = "auto"):
+async def get_etf(
+    ticker: str, force_refresh: bool = False, source: str = "auto"
+):
     """
     Get all data for a specific ETF ticker.
 
@@ -152,13 +154,17 @@ async def get_etf(ticker: str, force_refresh: bool = False, source: str = "auto"
                     "ticker": ticker_upper,
                     "data": cached_data,
                     "cached": True,
-                    "source": cached_data.get("_source", "unknown")
+                    "source": cached_data.get("_source", "unknown"),
                 }
 
         # Determine data source
         use_eodhd = False
-        logger.info(f"Source parameter: {source}, eodhd_client available: {eodhd_client is not None}")
-        if source == "eodhd" or (source == "auto" and eodhd_client is not None):
+        logger.info(
+            f"Source parameter: {source}, eodhd_client available: {eodhd_client is not None}"
+        )
+        if source == "eodhd" or (
+            source == "auto" and eodhd_client is not None
+        ):
             use_eodhd = True
         logger.info(f"Will use EODHD: {use_eodhd}")
 
@@ -175,11 +181,15 @@ async def get_etf(ticker: str, force_refresh: bool = False, source: str = "auto"
                 data["_source"] = "eodhd"
                 data_source = "eodhd"
             except Exception as e:
-                logger.error(f"EODHD fetch failed for {ticker}, falling back to scraping: {e}")
-                if source == "eodhd":  # If explicitly requested EODHD, raise error
+                logger.error(
+                    f"EODHD fetch failed for {ticker}, falling back to scraping: {e}"
+                )
+                if (
+                    source == "eodhd"
+                ):  # If explicitly requested EODHD, raise error
                     raise HTTPException(
                         status_code=500,
-                        detail=f"EODHD API error for {ticker}: {str(e)}"
+                        detail=f"EODHD API error for {ticker}: {str(e)}",
                     )
                 # Otherwise fall back to scraping
                 use_eodhd = False
@@ -198,13 +208,13 @@ async def get_etf(ticker: str, force_refresh: bool = False, source: str = "auto"
             "ticker": ticker_upper,
             "data": data,
             "cached": False,
-            "source": data_source
+            "source": data_source,
         }
     except Exception as e:
         logger.error(f"Error fetching {ticker}: {str(e)}")
         raise HTTPException(
             status_code=500,
-            detail=f"Failed to fetch data for {ticker}: {str(e)}"
+            detail=f"Failed to fetch data for {ticker}: {str(e)}",
         )
 
 
@@ -215,10 +225,7 @@ async def get_etf_info(ticker: str):
         logger.info(f"Fetching info for {ticker}")
         etf = ETF(ticker.upper())
 
-        return {
-            "ticker": ticker.upper(),
-            "info": etf.info
-        }
+        return {"ticker": ticker.upper(), "info": etf.info}
     except Exception as e:
         logger.error(f"Error fetching info for {ticker}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -231,10 +238,7 @@ async def get_etf_holdings(ticker: str):
         logger.info(f"Fetching holdings for {ticker}")
         etf = ETF(ticker.upper())
 
-        return {
-            "ticker": ticker.upper(),
-            "holdings": etf.holdings
-        }
+        return {"ticker": ticker.upper(), "holdings": etf.holdings}
     except Exception as e:
         logger.error(f"Error fetching holdings for {ticker}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -247,10 +251,7 @@ async def get_etf_performance(ticker: str):
         logger.info(f"Fetching performance for {ticker}")
         etf = ETF(ticker.upper())
 
-        return {
-            "ticker": ticker.upper(),
-            "performance": etf.performance
-        }
+        return {"ticker": ticker.upper(), "performance": etf.performance}
     except Exception as e:
         logger.error(f"Error fetching performance for {ticker}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -263,10 +264,7 @@ async def get_etf_dividend(ticker: str):
         logger.info(f"Fetching dividend for {ticker}")
         etf = ETF(ticker.upper())
 
-        return {
-            "ticker": ticker.upper(),
-            "dividend": etf.dividend
-        }
+        return {"ticker": ticker.upper(), "dividend": etf.dividend}
     except Exception as e:
         logger.error(f"Error fetching dividend for {ticker}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -279,10 +277,7 @@ async def get_etf_expense(ticker: str):
         logger.info(f"Fetching expense for {ticker}")
         etf = ETF(ticker.upper())
 
-        return {
-            "ticker": ticker.upper(),
-            "expense": etf.expense
-        }
+        return {"ticker": ticker.upper(), "expense": etf.expense}
     except Exception as e:
         logger.error(f"Error fetching expense for {ticker}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -295,10 +290,7 @@ async def get_etf_technicals(ticker: str):
         logger.info(f"Fetching technicals for {ticker}")
         etf = ETF(ticker.upper())
 
-        return {
-            "ticker": ticker.upper(),
-            "technicals": etf.technicals
-        }
+        return {"ticker": ticker.upper(), "technicals": etf.technicals}
     except Exception as e:
         logger.error(f"Error fetching technicals for {ticker}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -335,4 +327,5 @@ async def clear_all_cache():
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8000)

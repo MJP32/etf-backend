@@ -22,6 +22,7 @@ with open(
 
 dev_requirements = {"black", "pre-commit"}
 api_requirements = {"fastapi", "uvicorn[standard]"}
+test_requirements = {"pytest", "pytest-cov", "pytest-asyncio", "httpx"}
 
 setup(
     name=name,
@@ -46,7 +47,8 @@ setup(
     extras_require={
         "dev": list(dev_requirements),
         "api": list(api_requirements),
-        "all": list(dev_requirements | api_requirements),
+        "test": list(test_requirements),
+        "all": list(dev_requirements | api_requirements | test_requirements),
     },
     entry_points={
         "console_scripts": [

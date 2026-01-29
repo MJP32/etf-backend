@@ -22,5 +22,12 @@ test_*.py
 *.pyo
 .pytest_cache/
 
+# Test coverage
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
 # Vercel
 .vercel

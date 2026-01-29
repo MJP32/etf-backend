@@ -30,7 +30,18 @@
       "Bash(xargs kill -9:*)",
       "Bash(powershell.exe -Command \"Stop-Process -Name python -Force -ErrorAction SilentlyContinue; Stop-Process -Name node -Force -ErrorAction SilentlyContinue\")",
       "Bash(powershell.exe -Command \"cd C:\\Users\\micha\\Documents\\dev; Rename-Item -Path ''nov'' -NewName ''etf'' -Force\")",
-      "Bash(powershell.exe -Command \"cd C:\\Users\\micha\\Documents\\dev\\etf; Rename-Item -Path ''pyetfdb-scraper'' -NewName ''etf-backend'' -Force\")"
+      "Bash(powershell.exe -Command \"cd C:\\Users\\micha\\Documents\\dev\\etf; Rename-Item -Path ''pyetfdb-scraper'' -NewName ''etf-backend'' -Force\")",
+      "Bash(git fetch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(powershell -Command \"iwr https://railway.app/install.ps1 -useb | iex\")",
+      "Bash(railway login:*)",
+      "Bash(vercel --version:*)",
+      "Bash(vercel:*)",
+      "Bash(python -m pytest:*)",
+      "Bash(pre-commit install)",
+      "Bash(python -m pre_commit:*)"
     ],
     "deny": [],
     "ask": []
